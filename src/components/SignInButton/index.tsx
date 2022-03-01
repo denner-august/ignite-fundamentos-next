@@ -6,8 +6,6 @@ import { FaGithub } from "react-icons/fa";
 export function SingInButton() {
   const { data: session, status } = useSession();
 
-  console.log(session);
-
   return session ? (
     <button
       type="button"
