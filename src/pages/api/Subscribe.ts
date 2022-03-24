@@ -30,26 +30,31 @@ export default async (req:NextApiRequest,res:NextApiResponse) => {
 
         let customerId = user.data.stripe_customer_id
 
-        if(!customerId){
-            const stripeCustomer = await stripe.customers.create({
-                email: session.user.email,
-                //metadade
-            })
-
-            await fauna.query(
-                q.Update(
-                    q.Ref(q.Collection('users'), user.ref.id),
-                    {
-                        data:{
-                            stripe_customer_id:stripeCustomer.id
+        try {
+            if(!customerId){
+         
+                const stripeCustomer = await stripe.customers.create({
+                    email: session.user.email,
+                    
+                })
+    
+                await fauna.query(
+                    q.Update(
+                        q.Ref(q.Collection('users'), user.ref.id),
+                        {
+                            data:{
+                                stripe_customer_id:stripeCustomer.id
+                            }
                         }
-                    }
+                    )
                 )
-            )
-
-            customerId = stripeCustomer.id
+    
+                customerId = stripeCustomer.id
+            }
+    
+        } catch (error) {
+            console.log(error)
         }
-
         const stripeCheckoutSession = await stripe.checkout.sessions.create({
             customer: customerId ,
             payment_method_types:['card'],
