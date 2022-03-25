@@ -5,12 +5,6 @@ import { stripe } from '../../services/stripe';
 import { saveSubscription } from "./_lib/manageSubscription";
 
 
-// export default(req:NextApiRequest, res:NextApiResponse) => {
-//     console.log('evento recebido')
-
-//     res.status(200).json({ok:true})
-// }
-
 async function buffer(readable:Readable){
     const chunks = [];
 
@@ -29,7 +23,11 @@ export const config = {
     }
 }
 
-const relevantEvents = new Set(['checkout.session.completed'])
+const relevantEvents = new Set([
+    'checkout.session.completed',
+    'customer.subscription.updated',
+    'customer.subscription.deleted',
+])
 
 export default async (req:NextApiRequest, res:NextApiResponse)=>{
   if( req.method == 'POST'){
@@ -50,13 +48,28 @@ export default async (req:NextApiRequest, res:NextApiResponse)=>{
 
        try{
         switch(type){
+            case 'customer.subscription.deleted':
+            case 'customer.subscription.updated':
+
+            const subscription = event.data.object as Stripe.Subscription;
+
+            await saveSubscription(
+                subscription.id,
+                subscription.customer.toString(),
+                false
+            );
+
+                break;
+
+
             case 'checkout.session.completed':
 
             const CheckoutSession = event.data.object as Stripe.Checkout.Session
 
                 await saveSubscription(
                     CheckoutSession.subscription.toString(),
-                    CheckoutSession.customer.toString()
+                    CheckoutSession.customer.toString(),
+                    true
                 )
 
                 break;
