@@ -1,0 +1,21 @@
+{
+  "id": "0f2f8d0e-4c9e-45e4-94f9-51d7fdb38792",
+  "uid": "adipisci-illo-commodi",
+  "type": "Publication",
+  "data": {
+    "title": [
+      {
+        "type": "heading1",
+        "text": "Harness efficient web-readiness",
+        "spans": []
+      }
+    ],
+    "Content": [
+      {
+        "type": "paragraph",
+        "text": "Culpa laboris aute do ipsum.",
+        "spans": []
+      }
+    ]
+  }
+}
