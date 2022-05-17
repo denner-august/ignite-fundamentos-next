@@ -1,5 +1,5 @@
 import { getSession, useSession } from "next-auth/react";
-import { GetStaticProps } from "next/types";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 import { RichText } from "prismic-dom";
 import { getPrismicClient } from "../../../services/prismic";
 import Head from "next/head";
@@ -54,7 +54,7 @@ export default function PostPreview({ post }: PostPreviewProps) {
   );
 }
 
-export const getStaticPaths = () => {
+export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [],
     fallback: "blocking",
