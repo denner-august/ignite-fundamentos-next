@@ -45,7 +45,7 @@ export default async function Subscribe(
         customerId = stripeCustomer.id;
       }
     } catch (error) {
-      console.log(error);
+      console.log("erro durante o cadastro do usuario", error);
     }
     const stripeCheckoutSession = await stripe.checkout.sessions.create({
       customer: customerId,

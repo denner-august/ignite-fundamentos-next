@@ -61,9 +61,10 @@ export default NextAuth({
 
         return true;
       } catch (error) {
-        console.log(error);
+        console.log("erro durante login", error);
         return false;
       }
     },
   },
+  secret: process.env.NEXTAUTH_SECRET,
 });
