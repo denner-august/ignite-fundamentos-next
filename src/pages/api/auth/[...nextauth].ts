@@ -13,6 +13,8 @@ export default NextAuth({
     }),
   ],
 
+  secret: process.env.SECRET,
+
   callbacks: {
     async session({ session }) {
       session.user.email;
@@ -68,5 +70,4 @@ export default NextAuth({
       }
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
 });
