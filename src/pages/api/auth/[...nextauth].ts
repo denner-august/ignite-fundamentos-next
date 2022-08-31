@@ -41,6 +41,7 @@ export default NextAuth({
 
         return { ...session, ActiveSubscription: userActiveSubscription };
       } catch (error) {
+        console.log("erro na sessão", error);
         return { ...session, ActiveSubscription: null };
       }
     },
@@ -61,6 +62,7 @@ export default NextAuth({
 
         return true;
       } catch (error) {
+        console.log("email", email);
         console.log("erro durante login", error);
         return false;
       }
