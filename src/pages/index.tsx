@@ -1,9 +1,12 @@
 import { GetStaticProps } from "next";
+import { useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { SubscribeButton } from "../components/SubscribeButton";
 import { stripe } from "../services/stripe";
 import styles from "./home.module.scss";
+
+import Swal from "sweetalert2";
 
 interface HomeProps {
   product: {
@@ -12,6 +15,15 @@ interface HomeProps {
   };
 }
 export default function Home({ product }: HomeProps) {
+  useEffect(() => {
+    Swal.fire({
+      icon: "info",
+      title: "LEIA COM ATENÇÃO",
+      text: "essa aplicação usa o stripe como pagamento na versão TESTE então para utilizar você devera simular uma assinatura, você pode usar o numero do cartão como 4242 4242 4242 4242 codigo 567 e data 12/37 o resto é so preencher de acordo com o campo pedido, alem disso é nessario uma conta no github",
+      confirmButtonText: "Confirmar",
+    });
+  }, []);
+
   return (
     <>
       <Head>

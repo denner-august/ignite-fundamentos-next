@@ -25,7 +25,8 @@
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
     "sass": "^1.49.7",
-    "stripe": "^8.203.0"
+    "stripe": "^8.203.0",
+    "sweetalert2": "^11.4.29"
   },
   "devDependencies": {
     "@testing-library/dom": "^8.16.0",
